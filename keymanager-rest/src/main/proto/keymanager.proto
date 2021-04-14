@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.orange";
+option java_outer_classname = "Keymanager";
+option objc_class_prefix = "HLW";
+
+package br.com.orange;
+
+service KeymanagerService {
+  rpc register (RegisterRequest) returns (RegisterResponse){}
+}
+
+service KeymanagerRemoveService {
+  rpc removepix (RemoveRequest) returns (RemoveResponse){}
+}
+
+service KeymanagerFindKey {
+    rpc findByKey(FindRequest) returns (FindResponse){}
+}
+
+service KeymanagerListService {
+    rpc listKey(ListRequest) returns (ListResponse){}
+}
+
+
+message ListRequest {
+    string clientId = 1;
+}
+
+
+message ListResponse {
+
+message AllPix {
+string id = 1;
+Keytype key = 2;
+string pix = 3;
+Account accountType = 4;
+string createAt = 5;
+}
+string clientId = 1;
+repeated AllPix keys = 2;
+}
+
+enum Keytype {
+ UNKNOW_TYPE = 0;
+ CPF = 1;
+ PHONE = 2;
+ EMAIL = 3;
+ CNPJ = 5;
+ RANDOM = 4;
+}
+
+enum Account {
+UNKNOW_ACCOUNT = 0;
+CHECKING = 1;
+SAVINGS = 2;
+}
+
+message RemoveRequest {
+    string id = 1;
+    string clientId = 2;
+}
+
+message FindRequest {
+message FiltroPorPixId{
+    string id = 1;
+    string clientId = 2;
+}
+
+oneof filtro {
+
+FiltroPorPixId pixId = 1;
+string pixkey = 2;
+}
+
+}
+
+message FindResponse {
+    string id = 1;
+    string agencia = 2;
+    string cpf = 3;
+    string instituicao = 4;
+    string nome = 5;
+    string conta = 6;
+    string tipoDeConta = 7;
+    string clientId = 8;
+    string criadoEm = 9;
+    string chave = 10;
+    string tipoDeChave = 11;
+}
+
+message RemoveResponse {
+   string message = 1;
+}
+
+message RegisterRequest {
+    string value = 1;
+    Keytype type = 2;
+    Account account = 3;
+    string clientId = 4;
+}
+
+message RegisterResponse {
+    string id = 1;
+    string clientId = 2;
+}
