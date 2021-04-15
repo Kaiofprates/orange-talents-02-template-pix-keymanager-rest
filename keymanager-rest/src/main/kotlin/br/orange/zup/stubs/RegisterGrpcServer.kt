@@ -1,5 +1,6 @@
 package br.orange.zup.stubs
 
+import br.com.orange.KeymanagerFindKeyGrpc
 import br.com.orange.KeymanagerServiceGrpc
 import io.grpc.ManagedChannel
 import io.micronaut.context.annotation.Factory
@@ -10,7 +11,10 @@ import javax.inject.Singleton
 class RegisterGrpcServer(@GrpcChannel("keymanager") val channel: ManagedChannel) {
 
         @Singleton
-        fun registerClientStub() =  KeymanagerServiceGrpc.newBlockingStub(channel)
+        fun registerClientStub() = KeymanagerServiceGrpc.newBlockingStub(channel)
+
+        @Singleton
+        fun findClientStub() = KeymanagerFindKeyGrpc.newBlockingStub(channel)
 
 }
 
