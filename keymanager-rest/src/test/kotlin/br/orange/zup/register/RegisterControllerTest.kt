@@ -38,6 +38,7 @@ internal class RegisterControllerTest {
         val CLIENT_ID  = UUID.randomUUID().toString()
     }
 
+    // FIXME: 16/04/2021  esse teste não está nada coerente por hora vou mudar a lógica de validação para conseguir fazer testes unitários
 
     @Test
     fun `deve retornar erro ao passar chave invalida para tipo randomico`(){
