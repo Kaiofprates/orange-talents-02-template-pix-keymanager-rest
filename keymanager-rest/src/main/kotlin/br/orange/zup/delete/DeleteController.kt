@@ -13,21 +13,23 @@ import javax.validation.Valid
 
 @Validated
 @Controller("/api/v1/client/{clientId}")
-class DeleteController(@Inject val client: KeymanagerRemoveServiceGrpc.KeymanagerRemoveServiceBlockingStub) {
+open class DeleteController(@Inject val client: KeymanagerRemoveServiceGrpc.KeymanagerRemoveServiceBlockingStub) {
 
 
     @Delete("/pix")
-    fun delete(clientId: UUID, @Valid @Body request: DeletePixRequest): HttpResponse<Any>{
+    open fun delete(clientId: UUID, @Valid @Body request: DeletePixRequest): HttpResponse<DeleteResponse>{
 
         val response = client.removepix(RemoveRequest.newBuilder()
             .setClientId(clientId.toString())
-            .setId(request.id.toString()).build())
+            .setId(request.idpix.toString()).build())
 
         if(response.message.isNullOrBlank()) return HttpResponse.unprocessableEntity()
 
-        return HttpResponse.ok(response.message)
+        return HttpResponse.ok(DeleteResponse(response.message))
     }
 
 }
+
+data class DeleteResponse(val message: String)
 
 

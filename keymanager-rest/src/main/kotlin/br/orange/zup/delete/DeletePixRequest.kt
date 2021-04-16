@@ -7,5 +7,5 @@ import java.util.*
 @Introspected
 data class DeletePixRequest(
     @field:IsUUid
-    val id: UUID,
+    var idpix: UUID
 )

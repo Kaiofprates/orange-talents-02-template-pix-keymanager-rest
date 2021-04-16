@@ -12,17 +12,14 @@ import javax.validation.Valid
 
 @Validated
 @Controller("/api/v1/client/{clientId}")
-class RegisterController(@Inject val client: KeymanagerServiceGrpc.KeymanagerServiceBlockingStub) {
+open class RegisterController(@Inject val client: KeymanagerServiceGrpc.KeymanagerServiceBlockingStub) {
 
     @Post("/pix")
-    fun create(clientId: UUID, @Valid @Body request: NewPixRequest): HttpResponse<Any>{
+    open fun create(clientId: UUID, @Valid @Body request: NewPixRequest): HttpResponse<CreateResponse>{
 
         val response = client.register(request.toModel(clientId))
         return HttpResponse.created(CreateResponse(response.id,response.clientId))
 
     }
-
-    data class CreateResponse(val id: String, val clientId: String)
-
 
 }

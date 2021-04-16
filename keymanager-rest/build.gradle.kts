@@ -1,4 +1,6 @@
 import com.google.protobuf.gradle.*
+
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.4.30"
     id("org.jetbrains.kotlin.kapt") version "1.4.30"
@@ -32,6 +34,7 @@ dependencies {
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("org.hibernate:hibernate-validator:6.1.6.Final")
     implementation("org.junit.jupiter:junit-jupiter-params:5.0.0") // para testes parametrizados
+    implementation("io.micronaut.xml:micronaut-jackson-xml") // para chamadas com xml
     implementation("javax.annotation:javax.annotation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
@@ -42,7 +45,7 @@ dependencies {
     testImplementation("io.micronaut:micronaut-http-client")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.mockito:mockito-core:3.8.0")
-    testImplementation("org.mockito:mockito-inline:3.8.0")
+    testImplementation("org.mockito:mockito-inline:3.9.0")
     testImplementation("io.micronaut.test:micronaut-test-junit5:2.3.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
 
@@ -84,6 +87,7 @@ protobuf {
         artifact = "com.google.protobuf:protoc:3.14.0"
     }
     plugins {
+        id("org.jetbrains.kotlin.plugin.noarg:1.4.32")
         id("grpc") {
             artifact = "io.grpc:protoc-gen-grpc-java:1.33.1"
         }

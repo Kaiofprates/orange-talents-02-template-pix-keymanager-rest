@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull
 
 @PixValid
 @Introspected
-class NewPixRequest(
+data class NewPixRequest(
     val key: String,
     @field:NotNull
     val type: KeyType,
@@ -20,7 +20,7 @@ class NewPixRequest(
         return RegisterRequest.newBuilder()
             .setType(Keytype.valueOf(this.type.name))
             .setClientId(clientId.toString())
-            .setValue(this.key ?: "")
+            .setValue(this.key)
             .setAccount(Account.valueOf(this.account.name))
             .build()
     }
