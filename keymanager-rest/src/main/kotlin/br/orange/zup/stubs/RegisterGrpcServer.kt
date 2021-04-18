@@ -1,6 +1,7 @@
 package br.orange.zup.stubs
 
 import br.com.orange.KeymanagerFindKeyGrpc
+import br.com.orange.KeymanagerListServiceGrpc
 import br.com.orange.KeymanagerRemoveServiceGrpc
 import br.com.orange.KeymanagerServiceGrpc
 import io.grpc.ManagedChannel
@@ -19,6 +20,9 @@ class RegisterGrpcServer(@GrpcChannel("keymanager") val channel: ManagedChannel)
 
         @Singleton
         fun deleteClientStub() = KeymanagerRemoveServiceGrpc.newBlockingStub(channel)
+
+        @Singleton
+        fun getAllClientStub() = KeymanagerListServiceGrpc.newBlockingStub(channel)
 
 }
 
