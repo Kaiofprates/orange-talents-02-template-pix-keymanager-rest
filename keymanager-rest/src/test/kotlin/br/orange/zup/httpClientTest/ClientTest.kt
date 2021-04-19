@@ -2,12 +2,14 @@ package br.orange.zup.httpClientTest
 
 import br.orange.zup.delete.DeletePixRequest
 import br.orange.zup.delete.DeleteResponse
+import br.orange.zup.findKey.FindKeyResponse
 import br.orange.zup.register.CreateResponse
 import br.orange.zup.register.NewPixRequest
 import br.orange.zup.register.RegisterController
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Delete
+import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.client.annotation.Client
 import java.util.*
@@ -25,6 +27,11 @@ interface ClientTest {
     @Post("api/v1/client/{clientId}/pix")
     fun create(clientId: UUID, @Body request: NewPixRequest): HttpResponse<CreateResponse>
 
+    @Get("/api/v1/client/{clientId}/keys")
+    fun getAllKeys(clientId: UUID): HttpResponse<Any>
+
+    @Get("/api/v1/client/{clientId}/key/{key}")
+    fun findKey(clientId: UUID, key: UUID): HttpResponse<FindKeyResponse>
 
 
 }
